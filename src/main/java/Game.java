@@ -20,7 +20,7 @@ public class Game {
         proceed(cars, carInfos, moveTimes, currentMoveTimes);
 
         int maxPosition = operation.getMaxPosition(cars, carInfos);
-        String winners = operation.getWinnderNames(cars, carInfos, maxPosition);
+        String winners = operation.getWinnerNames(cars, carInfos, maxPosition);
         print.printWinners(winners);
     }
 
