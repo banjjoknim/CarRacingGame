@@ -13,8 +13,8 @@ public class Actions {
         carInfos.put(car, currentPosition);
     }
 
-    void action(Car car, Map<Car, Integer> carInfos) {
-        if (condition.isGood()) {
+    void action(Car car, Map<Car, Integer> carInfos, boolean condition) {
+        if (condition) {
             drive(car, carInfos);
             return;
         }
