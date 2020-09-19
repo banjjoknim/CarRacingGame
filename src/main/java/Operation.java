@@ -9,15 +9,28 @@ public class Operation {
     private Scanner scanner = new Scanner(System.in);
     private Condition condition = new Condition();
     private Check check = new Check();
+    private Print print = new Print();
 
     String inputNames() {
         return scanner.next();
     }
 
-    List<Car> setCars(String names) {
+    private List<Car> setCars(String names) {
         return Arrays.stream(names.split(","))
             .map(Car::new)
             .collect(Collectors.toList());
+    }
+
+    List<Car> getCars() {
+        while (true) {
+            String names = inputNames();
+            List<Car> cars = setCars(names);
+            if (!check.isCorrectNames(cars)) {
+                print.printPleaseInputAgain();
+                continue;
+            }
+            return cars;
+        }
     }
 
     Map<Car, Integer> init(List<Car> cars) {

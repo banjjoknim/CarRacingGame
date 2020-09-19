@@ -4,29 +4,25 @@ import java.util.Map;
 public class Game {
     private Operation operation = new Operation();
     private Print print = new Print();
-    private Check check = new Check();
 
     void play() {
         print.printStartGame();
         print.printPleaseInput();
-        List<Car> cars;
-        Map<Car, Integer> carInfos = null;
-
-        while (true) {
-            String names = operation.inputNames();
-            cars = operation.setCars(names);
-            if (!check.isCorrectNames(cars)) {
-                print.printPleaseInputAgain();
-                continue;
-            }
-            carInfos = operation.init(cars);
-            break;
-        }
+        List<Car> cars = operation.getCars();
+        Map<Car, Integer> carInfos = operation.init(cars);
 
         print.printHowManyTimesTry();
-        int moveTimes = operation.inputMoveTimes();
         int currentMoveTimes = 0;
+        int moveTimes = operation.inputMoveTimes();
 
+        proceed(cars, carInfos, moveTimes, currentMoveTimes);
+
+        int maxPosition = operation.getMaxPosition(cars, carInfos);
+        String winners = operation.getWinnderNames(cars, carInfos, maxPosition);
+        print.printWinners(winners);
+    }
+
+    private void proceed(List<Car> cars, Map<Car, Integer> carInfos, int moveTimes, int currentMoveTimes) {
         while (currentMoveTimes < moveTimes) {
             currentMoveTimes++;
             for (int i = 0; i < cars.size(); i++) {
@@ -35,10 +31,6 @@ public class Game {
             }
             System.out.println();
         }
-
-        int maxPosition = operation.getMaxPosition(cars, carInfos);
-        String winners = operation.getWinnderNames(cars, carInfos, maxPosition);
-        print.printWinners(winners);
     }
 
     public static void main(String[] args) {
