@@ -2,8 +2,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Game {
-    private Condition condition = new Condition();
-    private Check check = new Check();
     private Operation operation = new Operation();
     private Print print = new Print();
 
