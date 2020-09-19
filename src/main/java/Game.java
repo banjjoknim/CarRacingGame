@@ -4,13 +4,24 @@ import java.util.Map;
 public class Game {
     private Operation operation = new Operation();
     private Print print = new Print();
+    private Check check = new Check();
 
     void play() {
         print.printStartGame();
         print.printPleaseInput();
-        String names = operation.inputNames();
-        List<Car> cars = operation.setCars(names);
-        Map<Car, Integer> carInfos = operation.init(cars);
+        List<Car> cars;
+        Map<Car, Integer> carInfos = null;
+
+        while (true) {
+            String names = operation.inputNames();
+            cars = operation.setCars(names);
+            if (!check.isCorrectNames(cars)) {
+                print.printPleaseInputAgain();
+                continue;
+            }
+            carInfos = operation.init(cars);
+            break;
+        }
 
         print.printHowManyTimesTry();
         int moveTimes = operation.inputMoveTimes();
@@ -26,7 +37,8 @@ public class Game {
         }
 
         int maxPosition = operation.getMaxPosition(cars, carInfos);
-        print.printWinners(cars, carInfos, maxPosition);
+        String winners = operation.getWinnderNames(cars, carInfos, maxPosition);
+        print.printWinners(winners);
     }
 
     public static void main(String[] args) {

@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class Operation {
     private Scanner scanner = new Scanner(System.in);
     private Condition condition = new Condition();
+    private Check check = new Check();
 
     String inputNames() {
         return scanner.next();
@@ -62,7 +63,7 @@ public class Operation {
 
     String getWinnderNames(List<Car> cars, Map<Car, Integer> carInfos, int maxPosition) {
         return cars.stream()
-            .filter(car -> carInfos.get(car) == maxPosition)
+            .filter(car -> check.isWinner(car, carInfos, maxPosition))
             .map(Car::getName)
             .collect(Collectors.joining(", "));
     }
