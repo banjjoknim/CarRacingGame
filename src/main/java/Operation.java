@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 public class Operation {
     private Scanner scanner = new Scanner(System.in);
-    private Condition condition = new Condition();
     private Check check = new Check();
     private Print print = new Print();
 
@@ -43,24 +42,6 @@ public class Operation {
         }
 
         return carInfos;
-    }
-
-    private void drive(Car car, Map<Car, Integer> carInfos) {
-        int currentPosition = carInfos.get(car);
-        carInfos.put(car, currentPosition + 1);
-    }
-
-    private void stop(Car car, Map<Car, Integer> carInfos) {
-        int currentPosition = carInfos.get(car);
-        carInfos.put(car, currentPosition);
-    }
-
-    void action(Car car, Map<Car, Integer> carInfos) {
-        if (condition.isGood()) {
-            drive(car, carInfos);
-            return;
-        }
-        stop(car, carInfos);
     }
 
     int inputMoveTimes() {

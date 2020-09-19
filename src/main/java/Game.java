@@ -3,6 +3,7 @@ import java.util.Map;
 
 public class Game {
     private Operation operation = new Operation();
+    private Actions actions = new Actions();
     private Print print = new Print();
 
     void play() {
@@ -26,7 +27,7 @@ public class Game {
         while (currentMoveTimes < moveTimes) {
             currentMoveTimes++;
             for (int i = 0; i < cars.size(); i++) {
-                operation.action(cars.get(i), carInfos);
+                actions.action(cars.get(i), carInfos);
                 print.printCarInfos(cars.get(i), carInfos);
             }
             System.out.println();
