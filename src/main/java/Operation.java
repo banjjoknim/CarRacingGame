@@ -11,7 +11,7 @@ public class Operation {
     private Print print = new Print();
 
     String inputNames() {
-        return scanner.next();
+        return scanner.nextLine();
     }
 
     private List<Car> setCars(String names) {
@@ -55,7 +55,7 @@ public class Operation {
             .getAsInt();
     }
 
-    String getWinnderNames(List<Car> cars, Map<Car, Integer> carInfos, int maxPosition) {
+    String getWinnerNames(List<Car> cars, Map<Car, Integer> carInfos, int maxPosition) {
         return cars.stream()
             .filter(car -> check.isWinner(car, carInfos, maxPosition))
             .map(Car::getName)
