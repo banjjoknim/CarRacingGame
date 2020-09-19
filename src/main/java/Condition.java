@@ -5,13 +5,12 @@ public class Condition {
     private static final boolean GOOD = true;
     private static final boolean BAD = false;
 
-    private int createConditionValue() {
+    int createConditionValue() {
         int conditionValue = (int) (CONDITION_MIN_VALUE + Math.random() * CONDITION_MAX_VALUE);
         return conditionValue;
     }
 
-    public boolean isGood() {
-        int conditionValue = createConditionValue();
+    boolean isGood(int conditionValue) {
         if (conditionValue >= CONDITION_GOOD_MIN_VALUE) {
             return GOOD;
         }

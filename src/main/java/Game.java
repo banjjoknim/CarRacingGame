@@ -28,7 +28,8 @@ public class Game {
         while (currentMoveTimes < moveTimes) {
             currentMoveTimes++;
             for (int i = 0; i < cars.size(); i++) {
-                boolean currentCondition = condition.isGood();
+                int conditionValue = condition.createConditionValue();
+                boolean currentCondition = condition.isGood(conditionValue);
                 actions.action(cars.get(i), carInfos, currentCondition);
                 print.printCarInfos(cars.get(i), carInfos);
             }
