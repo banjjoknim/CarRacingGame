@@ -12,7 +12,7 @@ public class Game {
         print.printPleaseInput();
 
         String names = operation.setCarNames();
-        List<Car> cars = operation.getCars(names);
+        List<Car> cars = operation.setCars(names);
         Map<Car, Integer> carInfos = operation.init(cars);
 
         print.printHowManyTimesTry();

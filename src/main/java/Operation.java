@@ -26,15 +26,10 @@ public class Operation {
         return names;
     }
 
-    private List<Car> setCars(String names) {
+    List<Car> setCars(String names) {
         return Arrays.stream(names.split(","))
             .map(Car::new)
             .collect(Collectors.toList());
-    }
-
-    List<Car> getCars(String names) {
-        List<Car> cars = setCars(names);
-        return cars;
     }
 
     Map<Car, Integer> init(List<Car> cars) {
