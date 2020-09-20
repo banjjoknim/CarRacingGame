@@ -10,7 +10,7 @@ class ConditionTest {
     @Test
     void createConditionValueTest() {
         int conditionValue = condition.createConditionValue();
-        System.out.println(conditionValue);
+        assertThat(conditionValue).isBetween(0, 9);
     }
 
     @ParameterizedTest
