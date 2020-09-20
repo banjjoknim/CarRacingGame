@@ -19,7 +19,7 @@ public class Print {
         System.out.println(positionView);
     }
 
-    void printCarInfos(Car car, Map<Car, Integer> carInfos) {
+    void printCarState(Car car, Map<Car, Integer> carInfos) {
         printCarName(car);
         System.out.print(" : ");
         printCarPosition(carInfos.get(car));

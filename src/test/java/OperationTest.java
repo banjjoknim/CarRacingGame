@@ -25,7 +25,7 @@ class OperationTest {
             assertThat(names).isBlank();
             return;
         }
-        
+
         assertThat(scanner.nextLine()).isEqualTo(names); // inputNames() 메소드의 바디 => scanner.nextLine()
     }
 

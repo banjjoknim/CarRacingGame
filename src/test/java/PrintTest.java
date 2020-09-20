@@ -31,7 +31,7 @@ class PrintTest {
         Car car = new Car(name);
         Map<Car, Integer> carInfos = new HashMap<>();
         carInfos.put(car, Integer.valueOf(position));
-        print.printCarInfos(car, carInfos);
+        print.printCarState(car, carInfos);
         assertThat(byteArrayOutputStream.toString().trim()).isEqualTo(expectedMessage);
     }
 

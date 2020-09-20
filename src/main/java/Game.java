@@ -13,16 +13,16 @@ public class Game {
 
         String names = operation.setCarNames();
         List<Car> cars = operation.setCars(names);
-        Map<Car, Integer> carInfos = operation.init(cars);
+        Map<Car, Integer> carStates = operation.init(cars);
 
         print.printHowManyTimesTry();
         int currentMoveTimes = 0;
         int moveTimes = operation.inputMoveTimes();
 
-        proceed(cars, carInfos, moveTimes, currentMoveTimes);
+        proceed(cars, carStates, moveTimes, currentMoveTimes);
 
-        int maxPosition = operation.getMaxPosition(cars, carInfos);
-        String winners = operation.getWinnerNames(cars, carInfos, maxPosition);
+        int maxPosition = operation.getMaxPosition(cars, carStates);
+        String winners = operation.getWinnerNames(cars, carStates, maxPosition);
         print.printWinners(winners);
     }
 
@@ -33,7 +33,7 @@ public class Game {
                 int conditionValue = condition.createConditionValue();
                 boolean currentCondition = condition.isGood(conditionValue);
                 actions.action(cars.get(i), carInfos, currentCondition);
-                print.printCarInfos(cars.get(i), carInfos);
+                print.printCarState(cars.get(i), carInfos);
             }
             System.out.println();
         }
