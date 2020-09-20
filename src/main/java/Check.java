@@ -8,11 +8,21 @@ public class Check {
     private static final boolean CORRECT_NAMES = true;
     private static final boolean NOT_CORRECT_NAMES = false;
 
-    boolean isCorrectNames(String names) {
-        boolean lengthIsBelowFive = Arrays.stream(names.split(","))
+    private boolean isNotBlankNames(String names) {
+        return Arrays.stream(names.split(","))
+            .map(name -> name.trim())
+            .allMatch(name -> !"".equals(name));
+    }
+
+    private boolean isLengthIsBelowFiveNames(String names) {
+        return Arrays.stream(names.split(","))
+            .map(name -> name.trim())
             .mapToInt(name -> name.length())
             .allMatch(length -> length <= CORRECT_NAME_LENGTH_LIMIT);
-        if (lengthIsBelowFive) {
+    }
+
+    boolean isCorrectNames(String names) {
+        if (isNotBlankNames(names) && isLengthIsBelowFiveNames(names)) {
             return CORRECT_NAMES;
         }
         return NOT_CORRECT_NAMES;
