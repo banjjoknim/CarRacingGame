@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -8,9 +9,9 @@ public class Check {
     private static final boolean CORRECT_NAMES = true;
     private static final boolean NOT_CORRECT_NAMES = false;
 
-    boolean isCorrectNames(List<Car> cars) {
-        boolean lengthIsBelowFive = cars.stream()
-            .mapToInt(car -> car.getName().length())
+    boolean isCorrectNames(String names) {
+        boolean lengthIsBelowFive = Arrays.stream(names.split(","))
+            .mapToInt(name -> name.length())
             .allMatch(length -> length <= CORRECT_NAME_LENGTH_LIMIT);
         if (lengthIsBelowFive) {
             return CORRECT_NAMES;

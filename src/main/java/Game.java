@@ -10,7 +10,9 @@ public class Game {
     void play() {
         print.printStartGame();
         print.printPleaseInput();
-        List<Car> cars = operation.getCars();
+
+        String names = operation.setCarNames();
+        List<Car> cars = operation.getCars(names);
         Map<Car, Integer> carInfos = operation.init(cars);
 
         print.printHowManyTimesTry();
