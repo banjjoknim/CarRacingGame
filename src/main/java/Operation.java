@@ -14,27 +14,31 @@ public class Operation {
         return scanner.nextLine();
     }
 
+    String setCarNames() {
+        String names;
+        while (true) {
+            names = inputNames();
+            if (check.isCorrectNames(names)) {
+                break;
+            }
+            print.printPleaseInputAgain();
+        }
+        return names;
+    }
+
     private List<Car> setCars(String names) {
         return Arrays.stream(names.split(","))
             .map(Car::new)
             .collect(Collectors.toList());
     }
 
-    List<Car> getCars() {
-        while (true) {
-            String names = inputNames();
-            List<Car> cars = setCars(names);
-            if (!check.isCorrectNames(cars)) {
-                print.printPleaseInputAgain();
-                continue;
-            }
-            return cars;
-        }
+    List<Car> getCars(String names) {
+        List<Car> cars = setCars(names);
+        return cars;
     }
 
     Map<Car, Integer> init(List<Car> cars) {
         Map<Car, Integer> carInfos = new HashMap<>();
-
         int numberOfCars = cars.size();
         for (int i = 0; i < numberOfCars; i++) {
             Car car = cars.get(i);
