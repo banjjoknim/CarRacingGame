@@ -1,9 +1,6 @@
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -16,9 +13,9 @@ class CheckTest {
     private Scanner scanner = new Scanner(System.in);
 
     @ParameterizedTest
-    @ValueSource(strings = {"aslkd,sdk,sisid,qlwke,dsn", "hi!,dalsk,qlkw,sdood", "crong,hihi!,okok!", "pobi,byeee",
+    @ValueSource(strings = {"aslkd,sdk,sisid,qlwke,dsn,asdas ", "hi!,dalsk,qlkw,sdood,asas ", " crong,hihi!,okok!", " pobi,byeee",
         "배재!!@", "hello"})
-    void isCorrectNamesIsTrueTest(String names) { // 5글자 이하 입력
+    void isCorrectNamesIsTrueTest(String names) {
         assertThat(check.isCorrectNames(names)).isTrue();
     }
 
