@@ -18,23 +18,15 @@ class CheckTest {
     @ParameterizedTest
     @ValueSource(strings = {"aslkd,sdk,sisid,qlwke,dsn", "hi!,dalsk,qlkw,sdood", "crong,hihi!,okok!", "pobi,byeee",
         "배재!!@", "hello"})
-    void isCorrectNamesIsTrueTest(String input) { // 5글자 이하 입력
-        List<Car> cars = new ArrayList<>();
-        Arrays.stream(input.split(","))
-            .map(Car::new)
-            .forEach(car -> cars.add(car));
-        assertThat(check.isCorrectNames(cars)).isTrue();
+    void isCorrectNamesIsTrueTest(String names) { // 5글자 이하 입력
+        assertThat(check.isCorrectNames(names)).isTrue();
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"aslas,alqwkepo", "sdlkmsd,pqwepoasd", "00403,asdlkadksm", "rormekd,sodkd",
         "qlqlwpsd,55555"})
     void isCorrectNamesIsFalseTest(String names) {
-        List<Car> cars = new ArrayList<>();
-        Arrays.stream(names.split(","))
-            .map(Car::new)
-            .forEach(car -> cars.add(car));
-        assertThat(check.isCorrectNames(cars)).isFalse();
+        assertThat(check.isCorrectNames(names)).isFalse();
     }
 
     @ParameterizedTest
