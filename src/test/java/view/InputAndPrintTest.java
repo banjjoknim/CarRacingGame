@@ -1,13 +1,10 @@
 package view;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -16,8 +13,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import com.sun.beans.editors.ByteEditor;
 
 import model.Car;
 

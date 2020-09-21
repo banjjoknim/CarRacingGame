@@ -1,8 +1,6 @@
 package model;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
