@@ -7,7 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class CarTest {
+class CarTests {
     private static final int DRIVE_POSITION = 1;
 
     @ParameterizedTest
@@ -23,11 +23,10 @@ class CarTest {
         Car car = new Car(input);
         System.out.println(car.getName());
         assertThat(car.getName()).isNull();
-        // assertThat(car.isCorrectName(car.getName())).isFalse();
     }
 
     @Test
-    void createConditionValueTest() {
+    void getConditionValueTest() {
         Car car = new Car("test");
         int conditionValue = car.getConditionValue();
         assertThat(conditionValue).isBetween(0, 9);
