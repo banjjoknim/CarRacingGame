@@ -2,50 +2,34 @@ package model;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class CarTest extends Car {
+class CarTest {
     private static final int DRIVE_POSITION = 1;
 
-    public CarTest(String name) {
-        super(name);
-    }
-
     @ParameterizedTest
-    @ValueSource(strings = {" asdsd", " sjd", "651   "})
+    @ValueSource(strings = {"asdsd", "sjd", "651"})
     void isCorrectNameTest(String input) {
         Car car = new Car(input);
-        assertThat(car.isCorrectName()).isTrue();
+        assertThat(car.isCorrectName(car.getName())).isTrue();
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"  ", "         ", "alskdmas  ", "  123456"})
     void isNotCorrectNameTest(String input) {
         Car car = new Car(input);
-        assertThat(car.isCorrectName()).isFalse();
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"asd", "aslkd   "})
-    void setUpCarsTest(String input) {
-        List<Car> cars = new ArrayList<>();
-        Car car = new Car(input);
-        car.setUpCars(cars);
-        for (int i = 0; i < cars.size(); i++) {
-            assertThat(cars.get(i).getName()).isEqualTo(input.trim());
-        }
+        System.out.println(car.getName());
+        assertThat(car.getName()).isNull();
+        // assertThat(car.isCorrectName(car.getName())).isFalse();
     }
 
     @Test
     void createConditionValueTest() {
         Car car = new Car("test");
-        int conditionValue = car.createConditionValue();
+        int conditionValue = car.getConditionValue();
         assertThat(conditionValue).isBetween(0, 9);
     }
 
