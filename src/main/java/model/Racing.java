@@ -5,35 +5,39 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Racing {
+    private List<Car> cars;
 
-    public List<Car> setCars(String input) {
-        String[] names = input.split(",");
-        return Arrays.stream(names)
+    public Racing(String inputNames) {
+        this.cars = Arrays.stream(inputNames.split(","))
             .map(Car::new)
             .collect(Collectors.toList());
     }
 
-    public void race(List<Car> cars) {
+    public List<Car> getCars() {
+        return cars;
+    }
+
+    public void race() {
         cars.stream()
             .forEach(Car::drive);
     }
 
-    public String getWinners(List<Car> cars) {
-        int maxPosition = getMaxPosition(cars);
+    public String getWinners() {
         return cars.stream()
-            .filter(car -> isWinner(car, maxPosition))
+            .filter(car -> isWinner(car))
             .map(Car::getName)
             .collect(Collectors.joining(", "));
     }
 
-    private int getMaxPosition(List<Car> cars) {
+    private boolean isWinner(Car car) {
+        return getMaxPosition() == car.getPosition();
+    }
+
+    private int getMaxPosition() {
         return cars.stream()
             .mapToInt(Car::getPosition)
             .max()
             .getAsInt();
     }
 
-    private boolean isWinner(Car car, int maxPosition) {
-        return maxPosition == car.getPosition();
-    }
 }
