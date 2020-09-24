@@ -1,6 +1,5 @@
 package controller;
 
-import java.util.List;
 import java.util.Scanner;
 
 import model.Car;
@@ -14,27 +13,26 @@ public class GameController {
     public static final String PLEASE_INPUT_AGAIN = "잘못된 입력입니다. 다시 입력해주세요.";
 
     private Scanner scanner = new Scanner(System.in);
-    private Racing racing = new Racing();
 
     public void play() {
         System.out.println(START_GAME_MESSAGE);
 
         System.out.println(PLEASE_INPUT);
-        List<Car> cars = inputCars();
+        Racing racing = inputCars();
         System.out.println(HOW_MANY_TIMES_TRY_MESSAGE);
         int moveTimes = inputMoveTimes();
 
-        proceed(moveTimes, cars);
+        proceed(moveTimes, racing);
 
-        String winners = racing.getWinners(cars);
+        String winners = racing.getWinners();
         System.out.println(winners + IS_WIN);
     }
 
-    private List<Car> inputCars() {
+    private Racing inputCars() {
         while (true) {
             try {
                 String inputNames = scanner.nextLine();
-                return racing.setCars(inputNames);
+                return new Racing(inputNames);
             } catch (Exception e) {
                 System.out.println(PLEASE_INPUT_AGAIN);
             }
@@ -52,10 +50,10 @@ public class GameController {
         }
     }
 
-    private void proceed(int moveTimes, List<Car> cars) {
+    private void proceed(int moveTimes, Racing racing) {
         for (int i = 0; i < moveTimes; i++) {
-            racing.race(cars);
-            showCars(cars);
+            racing.race();
+            showCars(racing);
             System.out.println();
         }
     }
@@ -68,8 +66,8 @@ public class GameController {
         return positionView;
     }
 
-    private void showCars(List<Car> cars) {
-        cars.stream()
+    private void showCars(Racing racing) {
+        racing.getCars().stream()
             .forEach(this::showCarStatus);
     }
 
