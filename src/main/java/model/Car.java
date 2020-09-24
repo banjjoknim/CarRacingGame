@@ -27,14 +27,6 @@ public class Car {
         return position;
     }
 
-    public String getPositionView() {
-        String positionView = "";
-        for (int i = 0; i < this.position; i++) {
-            positionView += "-";
-        }
-        return positionView;
-    }
-
     private boolean isCorrectName(String name) {
         return isNotBlank(name) && isLengthIsBelowCorrectNameLengthLimit(name);
     }
