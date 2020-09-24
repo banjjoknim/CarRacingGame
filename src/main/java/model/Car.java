@@ -12,14 +12,11 @@ public class Car {
     private int position = 0;
 
     public Car(String name) {
-        try {
-            if (isCorrectName(name)) {
-                this.name = name;
-                return;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (isCorrectName(name)) {
+            this.name = name;
+            return;
         }
+        throw new RuntimeException();
     }
 
     public String getName() {
