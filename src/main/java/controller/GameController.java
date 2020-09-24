@@ -12,6 +12,7 @@ public class GameController {
     private static final String HOW_MANY_TIMES_TRY_MESSAGE = "시도할 회수는 몇 회인가요?";
     private static final String IS_WIN = " 이(가) 최종 우승하였습니다.";
     public static final String PLEASE_INPUT_AGAIN = "잘못된 입력입니다. 다시 입력해주세요.";
+
     private Scanner scanner = new Scanner(System.in);
     private Racing racing = new Racing();
 
@@ -23,10 +24,9 @@ public class GameController {
         System.out.println(HOW_MANY_TIMES_TRY_MESSAGE);
         int moveTimes = inputMoveTimes();
 
-        showProcess(moveTimes, cars);
+        proceed(moveTimes, cars);
 
-        int maxPosition = racing.getMaxPosition(cars);
-        String winners = racing.getWinners(cars, maxPosition);
+        String winners = racing.getWinners(cars);
         System.out.println(winners + IS_WIN);
     }
 
@@ -52,7 +52,7 @@ public class GameController {
         }
     }
 
-    private void showProcess(int moveTimes, List<Car> cars) {
+    private void proceed(int moveTimes, List<Car> cars) {
         for (int i = 0; i < moveTimes; i++) {
             racing.race(cars);
             showCars(cars);
@@ -60,15 +60,24 @@ public class GameController {
         }
     }
 
-    private void showCars(List<Car> cars) {
-        int size = cars.size();
-        for (int i = 0; i < size; i++) {
-            Car car = cars.get(i);
-            System.out.print(car.getName());
-            System.out.print(" : ");
-            System.out.print(car.getPositionView());
-            System.out.println();
+    private String getPositionView(Car car) {
+        String positionView = "";
+        for (int i = 0; i < car.getPosition(); i++) {
+            positionView += "-";
         }
+        return positionView;
+    }
+
+    private void showCars(List<Car> cars) {
+        cars.stream()
+            .forEach(this::showCarStatus);
+    }
+
+    private void showCarStatus(Car car) {
+        System.out.print(car.getName());
+        System.out.print(" : ");
+        System.out.print(getPositionView(car));
+        System.out.println();
     }
 
     public static void main(String[] args) {
