@@ -27,7 +27,15 @@ public class Car {
         return position;
     }
 
-    public boolean isCorrectName(String name) {
+    public String getPositionView() {
+        String positionView = "";
+        for (int i = 0; i < this.position; i++) {
+            positionView += "-";
+        }
+        return positionView;
+    }
+
+    private boolean isCorrectName(String name) {
         return isNotBlank(name) && isLengthIsBelowCorrectNameLengthLimit(name);
     }
 
@@ -39,7 +47,14 @@ public class Car {
         return name.length() <= CORRECT_NAME_LENGTH_LIMIT;
     }
 
-    public int getConditionValue() {
+    public void drive() {
+        int conditionValue = getConditionValue();
+        if (isGood(conditionValue)) {
+            this.position = this.position + DRIVE_POSITION;
+        }
+    }
+
+    private int getConditionValue() {
         int conditionValue = (int) (CONDITION_MIN_VALUE + Math.random() * CONDITION_MAX_VALUE);
         return conditionValue;
     }
@@ -51,17 +66,4 @@ public class Car {
         return BAD;
     }
 
-    public void drive(int conditionValue) {
-        if (isGood(conditionValue)) {
-            this.position = this.position + DRIVE_POSITION;
-        }
-    }
-
-    public String getPositionView() {
-        String positionView = "";
-        for (int i = 0; i < this.getPosition(); i++) {
-            positionView += "-";
-        }
-        return positionView;
-    }
 }
