@@ -19,16 +19,37 @@ public class GameController {
         System.out.println(START_GAME_MESSAGE);
 
         System.out.println(PLEASE_INPUT);
-        String input = scanner.nextLine();
+        List<Car> cars = inputCars();
         System.out.println(HOW_MANY_TIMES_TRY_MESSAGE);
-        int moveTimes = scanner.nextInt();
+        int moveTimes = inputMoveTimes();
 
-        List<Car> cars = racing.setCars(input);
         showProcess(moveTimes, cars);
 
         int maxPosition = racing.getMaxPosition(cars);
         String winners = racing.getWinners(cars, maxPosition);
         System.out.println(winners + IS_WIN);
+    }
+
+    private List<Car> inputCars() {
+        while (true) {
+            try {
+                String inputNames = scanner.nextLine();
+                return racing.setCars(inputNames);
+            } catch (Exception e) {
+                System.out.println(PLEASE_INPUT_AGAIN);
+            }
+        }
+    }
+
+    private int inputMoveTimes() {
+        while (true) {
+            try {
+                return scanner.nextInt();
+            } catch (Exception e) {
+                System.out.println(PLEASE_INPUT_AGAIN);
+                scanner = new Scanner(System.in); // Scanner의 버그로 인해 다시 초기화해야 한다.
+            }
+        }
     }
 
     private void showProcess(int moveTimes, List<Car> cars) {
