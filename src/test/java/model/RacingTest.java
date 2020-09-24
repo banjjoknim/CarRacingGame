@@ -12,34 +12,47 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class RacingTest {
-    Racing racing = new Racing();
 
     @DisplayName("경주에 참가할 자동차 세팅 테스트")
     @ParameterizedTest
     @ValueSource(strings = {"als,qweop,skld", "car1,car2,car3"})
-    void setCarsTest(String input) {
-        List<Car> cars = racing.setCars(input);
+    void newRacingTest(String input) {
+        Racing racing = new Racing(input);
+        String racingCars = racing.getCars().stream()
+            .map(Car::getName)
+            .collect(Collectors.joining(","));
+
+        List<Car> cars = Arrays.stream(input.split(","))
+            .map(Car::new)
+            .collect(Collectors.toList());
         String settedCars = cars.stream()
             .map(Car::getName)
             .collect(Collectors.joining(","));
-        assertThat(settedCars).isEqualTo(input);
+
+        assertThat(racingCars).isEqualTo(settedCars);
     }
 
     @DisplayName("자동차 게임 진행 테스트")
     @ParameterizedTest
-    @ValueSource(strings = {"car1,car2", "carr1,carr2"})
-    void raceTest(String input) {
-        List<Car> cars = racing.setCars(input);
-        racing.race(cars);
+    @CsvSource(value = {"car1,car2:5", "carr1,carr2:3"}, delimiter = ':')
+    void raceTest(String input, String inputMoveTimes) {
+        Racing racing = new Racing(input);
+        int moveTimes = Integer.valueOf(inputMoveTimes);
+        for (int i = 0; i < moveTimes; i++) {
+            racing.race();
+        }
+        assertThat(
+            racing.getCars().stream()
+                .map(Car::getPosition)
+                .allMatch(position -> 0 <= position && position <= moveTimes))
+            .isTrue();
     }
 
     @DisplayName("자동차 게임 우승자 이름 얻기 테스트")
     @ParameterizedTest
     @CsvSource(value = {"car1,car2,car3:car1, car2, car3"}, delimiter = ':')
     void getWinnersTest(String input, String winners) {
-        List<Car> cars = Arrays.stream(input.split(","))
-            .map(Car::new)
-            .collect(Collectors.toList());
-        assertThat(racing.getWinners(cars)).isEqualTo(winners);
+        Racing racing = new Racing(input);
+        assertThat(racing.getWinners()).isEqualTo(winners);
     }
 }
