@@ -16,7 +16,7 @@ public class Car {
             this.name = name;
             return;
         }
-        throw new RuntimeException();
+        throw new RuntimeException("부적합한 입력.");
     }
 
     public String getName() {
