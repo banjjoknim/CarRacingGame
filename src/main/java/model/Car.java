@@ -8,23 +8,21 @@ public class Car {
     private static final boolean GOOD = true;
     private static final boolean BAD = false;
     private static final int CORRECT_NAME_LENGTH_LIMIT = 5;
-    private String name;
+    private static final String NOT_SUITABLE_INPUT = "부적합한 입력입니다.";
+    private static final String CAR_POSITION_VIEW = "-";
+
+    private final String name;
     private int position = 0;
 
     public Car(String name) {
-        if (isCorrectName(name)) {
-            this.name = name;
-            return;
+        validateName(isCorrectName(name));
+        this.name = name;
+    }
+
+    private void validateName(boolean isCorrectName) {
+        if (!isCorrectName) {
+            throw new IllegalArgumentException(NOT_SUITABLE_INPUT);
         }
-        throw new RuntimeException("부적합한 입력.");
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getPosition() {
-        return position;
     }
 
     private boolean isCorrectName(String name) {
@@ -32,23 +30,37 @@ public class Car {
     }
 
     private boolean isNotBlank(String name) {
-        return !name.trim().isEmpty() && !name.contains(" ");
+        return !name.contains(" ");
     }
 
     private boolean isLengthIsBelowCorrectNameLengthLimit(String name) {
         return name.length() <= CORRECT_NAME_LENGTH_LIMIT;
     }
 
-    public void drive() {
-        int conditionValue = getConditionValue();
+    public String getName() {
+        return new Car(name).name;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public String getPositionView(int position) {
+        String positionView = "";
+        for (int i = 0; i < position; i++) {
+            positionView += CAR_POSITION_VIEW;
+        }
+        return positionView;
+    }
+
+    public void drive(int conditionValue) {
         if (isGood(conditionValue)) {
             this.position = this.position + DRIVE_POSITION;
         }
     }
 
-    private int getConditionValue() {
-        int conditionValue = (int) (CONDITION_MIN_VALUE + Math.random() * CONDITION_MAX_VALUE);
-        return conditionValue;
+    public int getConditionValue() {
+        return (int) (CONDITION_MIN_VALUE + Math.random() * CONDITION_MAX_VALUE);
     }
 
     private boolean isGood(int conditionValue) {
