@@ -1,7 +1,10 @@
 package controller;
 
+import model.Car;
 import model.Cars;
 import view.GameView;
+
+import java.util.List;
 
 public class GameController {
     private GameView gameView = new GameView();
@@ -19,8 +22,9 @@ public class GameController {
             gameView.showCars(cars);
         }
 
-        String winners = cars.getWinners();
-        gameView.showFinallyWinMessage(winners);
+        List<Car> winners = cars.getWinners();
+        String winnersName = gameView.getWinnersName(winners);
+        gameView.showFinallyWinMessage(winnersName);
     }
 
     public static void main(String[] args) {
