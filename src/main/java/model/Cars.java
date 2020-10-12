@@ -1,44 +1,42 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Cars {
     private List<Car> cars;
 
+    private Condition condition = new Condition();
+
     public Cars(List<Car> cars) {
         this.cars = cars;
     }
 
     public List<Car> getCars() {
-        return new Cars(cars).cars;
+        return new ArrayList<>(cars);
     }
 
     public void race() {
         for (int i = 0; i < cars.size(); i++) {
             Car car = cars.get(i);
-            int conditionValue = car.getConditionValue();
+            int conditionValue = condition.createConditionValue();
             car.drive(conditionValue);
         }
     }
 
-    public String getWinners() {
+    public List<Car> getWinners() {
         int maxPosition = getMaxPosition();
         return cars.stream()
-            .filter(car -> isWinner(car, maxPosition))
-            .map(Car::getName)
-            .collect(Collectors.joining(", "));
+                .filter(car -> car.isWinner(maxPosition))
+                .collect(Collectors.toList());
     }
 
-    private boolean isWinner(Car car, int maxPosition) {
-        return maxPosition == car.getPosition();
-    }
-
-    private int getMaxPosition() {
+    public int getMaxPosition() {
         return cars.stream()
-            .mapToInt(Car::getPosition)
-            .max()
-            .getAsInt();
+                .mapToInt(Car::getPosition)
+                .max()
+                .getAsInt();
     }
 
 }
