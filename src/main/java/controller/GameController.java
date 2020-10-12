@@ -1,10 +1,10 @@
 package controller;
 
+import java.util.List;
+
 import model.Car;
 import model.Cars;
 import view.GameView;
-
-import java.util.List;
 
 public class GameController {
     private GameView gameView = new GameView();

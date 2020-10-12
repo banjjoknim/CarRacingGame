@@ -1,12 +1,12 @@
 package view;
 
-import model.Car;
-import model.Cars;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+
+import model.Car;
+import model.Cars;
 
 public class GameView {
     private static final String START_GAME_MESSAGE = "자동차 경주 게임을 시작합니다.";
