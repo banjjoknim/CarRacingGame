@@ -20,7 +20,7 @@ public class Cars {
     public void race() {
         for (int i = 0; i < cars.size(); i++) {
             Car car = cars.get(i);
-            int conditionValue = condition.createConditionValue();
+            int conditionValue = new Condition().getConditionValue();
             car.drive(conditionValue);
         }
     }
