@@ -20,13 +20,14 @@ class CarsTest {
             .collect(Collectors.toList());
     }
 
-    @DisplayName("Cars 객체 생성 테스트")
+    @DisplayName("Cars 객체 불변 테스트")
     @ParameterizedTest
     @ValueSource(strings = {"als,qweop,skld", "car1,car2,car3"})
     void newCarsTest(String input) {
-        List<Car> cars = setUpTestCars(input);
-        assertThatCode(() -> new Cars(cars)).doesNotThrowAnyException();
-        assertThat(new Cars(cars).getCars()).isEqualTo(cars);
+        Cars cars = new Cars(setUpTestCars(input));
+        assertThatExceptionOfType(UnsupportedOperationException.class)
+            .as("Cars 객체는 변경할 수 없습니다.")
+            .isThrownBy(() -> cars.getCars().remove(0));
     }
 
     @DisplayName("경주 진행중 Car객체가 갖는 position값 유효성 테스트")
