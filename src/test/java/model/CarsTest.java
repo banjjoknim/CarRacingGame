@@ -55,6 +55,8 @@ class CarsTest {
     @CsvSource(value = {"car1,car2,car3:car1, car2, car3"}, delimiter = ':')
     void getWinnersTest(String input, String winners) {
         Cars cars = new Cars(setUpTestCars(input));
-        assertThat(cars.getWinners()).isEqualTo(winners);
+        assertThat(cars.getWinners())
+            .usingFieldByFieldElementComparator()
+            .containsExactly(new Car("car1"), new Car("car2"), new Car("car3"));
     }
 }
