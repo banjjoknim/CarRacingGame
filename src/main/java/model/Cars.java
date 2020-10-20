@@ -16,9 +16,8 @@ public class Cars {
     }
 
     public void race() {
-        for (int i = 0; i < cars.size(); i++) {
-            Car car = cars.get(i);
-            int conditionValue = new Condition().getConditionValue();
+        for (Car car : cars) {
+            int conditionValue = Condition.getConditionValue();
             car.drive(conditionValue);
         }
     }
@@ -26,11 +25,11 @@ public class Cars {
     public List<Car> getWinners() {
         int maxPosition = getMaxPosition();
         return cars.stream()
-            .filter(car -> car.isWinner(maxPosition))
+            .filter(car -> car.isMaxPosition(maxPosition))
             .collect(Collectors.toList());
     }
 
-    public int getMaxPosition() {
+    private int getMaxPosition() {
         return cars.stream()
             .mapToInt(Car::getPosition)
             .max()
