@@ -3,8 +3,6 @@ package model;
 public class Car {
     private static final int DRIVE_POSITION = 1;
     private static final int CONDITION_GOOD_MIN_VALUE = 4;
-    private static final boolean GOOD = true;
-    private static final boolean BAD = false;
     private static final int CORRECT_NAME_LENGTH_LIMIT = 5;
     private static final String NOT_SUITABLE_INPUT = "부적합한 입력입니다.";
 
@@ -43,19 +41,16 @@ public class Car {
     }
 
     public void drive(int conditionValue) {
-        if (isGood(conditionValue)) {
+        if (isDriveOrStop(conditionValue)) {
             this.position = this.position + DRIVE_POSITION;
         }
     }
 
-    private boolean isGood(int conditionValue) {
-        if (conditionValue >= CONDITION_GOOD_MIN_VALUE) {
-            return GOOD;
-        }
-        return BAD;
+    private boolean isDriveOrStop(int conditionValue) {
+        return conditionValue >= CONDITION_GOOD_MIN_VALUE;
     }
 
-    public boolean isWinner(int maxPosition) {
+    public boolean isMaxPosition(int maxPosition) {
         return maxPosition == position;
     }
 }
