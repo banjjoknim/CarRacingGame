@@ -7,24 +7,20 @@ import model.Cars;
 import view.GameView;
 
 public class GameController {
-    private GameView gameView = new GameView();
 
     public void play() {
-        gameView.showStartMessage();
+        GameView.showStartMessage();
 
-        gameView.showPleaseInputMessage();
-        Cars cars = gameView.inputCars();
-        gameView.showHowManyTimeTryMessage();
-        int moveTimes = gameView.inputMoveTimes();
+        Cars cars = GameView.inputCars();
+        int moveTimes = GameView.inputMoveTimes();
 
         for (int i = 0; i < moveTimes; i++) {
             cars.race();
-            gameView.showCars(cars);
+            GameView.showCars(cars);
         }
 
         List<Car> winners = cars.getWinners();
-        String winnersName = gameView.getWinnersName(winners);
-        gameView.showFinallyWinMessage(winnersName);
+        GameView.showFinallyWinMessage(winners);
     }
 
     public static void main(String[] args) {
