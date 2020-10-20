@@ -17,36 +17,37 @@ public class GameView {
     private static final String CAR_POSITION_VIEW = "-";
     private static final String IS_NOT_POSITIVE_NUMBER = "시도 횟수는 1이상의 정수여야 합니다.";
 
-    private Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
 
-    public void showStartMessage() {
+    public static void showStartMessage() {
         System.out.println(START_GAME_MESSAGE);
     }
 
-    public void showPleaseInputMessage() {
+    public static void showPleaseInputMessage() {
         System.out.println(PLEASE_INPUT_MESSAGE);
     }
 
-    public void showHowManyTimeTryMessage() {
+    public static void showHowManyTimeTryMessage() {
         System.out.println(HOW_MANY_TIMES_TRY_MESSAGE);
     }
 
-    private void showPleaseInputAgainMessage() {
+    private static void showPleaseInputAgainMessage() {
         System.out.println(PLEASE_INPUT_AGAIN_MESSAGE);
     }
 
-    public void showFinallyWinMessage(String winnersName) {
-        System.out.println(winnersName + IS_FINALLY_WIN_MESSAGE);
+    public static void showFinallyWinMessage(List<Car> winners) {
+        System.out.println(getWinnersName(winners) + IS_FINALLY_WIN_MESSAGE);
     }
 
-    public String getWinnersName(List<Car> winners) {
+    public static String getWinnersName(List<Car> winners) {
         return winners.stream()
                 .map(Car::getName)
                 .collect(Collectors.joining(", "));
     }
 
-    public Cars inputCars() {
+    public static Cars inputCars() {
         try {
+            showPleaseInputMessage();
             String inputNames = scanner.nextLine();
             List<Car> cars = Arrays.stream(inputNames.split(","))
                     .map(Car::new)
@@ -58,8 +59,9 @@ public class GameView {
         }
     }
 
-    public int inputMoveTimes() {
+    public static int inputMoveTimes() { //todo : moveTime 객체로 만들기.
         try {
+            showHowManyTimeTryMessage();
             if (!scanner.hasNextInt()) {
                 scanner.next();
                 showPleaseInputAgainMessage();
@@ -77,21 +79,21 @@ public class GameView {
         }
     }
 
-    private boolean isPositiveNumber(int moveTimes) {
+    private static boolean isPositiveNumber(int moveTimes) {
         return moveTimes > 0;
     }
 
-    public void showCars(Cars cars) {
+    public static void showCars(Cars cars) {
         cars.getCars().stream()
-                .forEach(this::showCarStatus);
+                .forEach(car -> showCarStatus(car));
         System.out.println();
     }
 
-    private void showCarStatus(Car car) {
+    private static void showCarStatus(Car car) {
         System.out.println(car.getName() + " : " + getPositionView(car.getPosition()));
     }
 
-    private String getPositionView(int position) {
+    private static String getPositionView(int position) {
         String positionView = "";
         for (int i = 0; i < position; i++) {
             positionView += CAR_POSITION_VIEW;
